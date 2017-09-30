@@ -1,6 +1,7 @@
 package anatoldevelopers.by.validator;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +19,8 @@ public class FieldsSchemaValidator {
         this.fieldRepository = fieldRepository;
     }
 
-    public List<ValidationError> validate(Map<String, Object> map) {
+    @NonNull
+    public List<ValidationError> validate(@Nullable Map<String, Object> map) {
         List<ValidationError> result = new ArrayList<>();
         if (map != null) {
             for (Map.Entry<String, Object> entry : map.entrySet()) {

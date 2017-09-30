@@ -1,6 +1,7 @@
 package anatoldevelopers.by.validator.validator;
 
 public abstract class AbstractValidator implements Validator {
+
     protected String message;
     protected String value;
 
@@ -27,7 +28,6 @@ public abstract class AbstractValidator implements Validator {
         return
                 "message='" + message + '\'' +
                         ", value='" + value + '\'';
-
     }
 
 }

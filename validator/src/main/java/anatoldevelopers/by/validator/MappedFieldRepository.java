@@ -1,5 +1,6 @@
 package anatoldevelopers.by.validator;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ public class MappedFieldRepository implements FieldRepository {
 
     private final Map<String, Field> fieldMap;
 
-    public MappedFieldRepository(Map<String, Field> fieldMap) {
+    public MappedFieldRepository(@NonNull Map<String, Field> fieldMap) {
         this.fieldMap = fieldMap;
     }
 
@@ -19,11 +20,11 @@ public class MappedFieldRepository implements FieldRepository {
 
     @Nullable
     @Override
-    public Field find(String name) {
+    public Field find(@Nullable String name) {
         return fieldMap.get(name);
     }
 
-    public void merge(Map<String, Field> toMerge) {
+    public void merge(@NonNull Map<String, Field> toMerge) {
         fieldMap.putAll(toMerge);
     }
 
