@@ -1,6 +1,5 @@
 package anatoldevelopers.by.validator;
 
-import java.util.Collections;
 import java.util.List;
 
 import anatoldevelopers.by.validator.validator.Validator;
@@ -8,10 +7,10 @@ import anatoldevelopers.by.validator.validator.Validator;
 public class Field {
 
     private String name;
+    private List<Validator> validators;
     private Type type;
-    private String description;
+    private String description; // TODO remove, it is useless
     private String format;
-    private List<Validator> validators = Collections.emptyList();
 
     public Field(String name, List<Validator> validators, Type type) {
         this.name = name;

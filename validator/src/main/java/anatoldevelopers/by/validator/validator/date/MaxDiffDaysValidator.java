@@ -25,7 +25,6 @@ public class MaxDiffDaysValidator extends AbstractValidator {
         this.value = value;
     }
 
-
     @NonNull
     @Override
     public List<ValidationError> validate(Field field, Object fieldValue) {

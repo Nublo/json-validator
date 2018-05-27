@@ -1,0 +1,30 @@
+{
+  "userName": {
+    "type": "string",
+    "validators": [
+      {
+        "type": "required",
+        "message": "notEmpty"
+      },
+      {
+        "type": "regExp",
+        "value": "^[A-Za-z\\-]{1,32}$",
+        "message": "latinAndDash"
+      }
+    ]
+  },
+  "password": {
+    "type": "string",
+    "validators": [
+      {
+        "type": "required",
+        "message": "notEmpty"
+      },
+      {
+        "type": "length",
+        "value": 6,
+        "message": "minSixSymbols"
+      }
+    ]
+  }
+}

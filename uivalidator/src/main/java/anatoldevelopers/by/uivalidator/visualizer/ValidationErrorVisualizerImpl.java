@@ -1,4 +1,4 @@
-package anatoldevelopers.by.uivalidator.manager;
+package anatoldevelopers.by.uivalidator.visualizer;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,34 +9,17 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class ValidationErrorVisualizer {
+public class ValidationErrorVisualizerImpl implements ValidationErrorVisualizer {
 
-    private static final String TAG = ValidationErrorVisualizer.class.toString();
+    private static final String TAG = ValidationErrorVisualizerImpl.class.toString();
 
     private final Context context;
 
-    public ValidationErrorVisualizer(@NonNull final Context context) {
+    public ValidationErrorVisualizerImpl(@NonNull final Context context) {
         this.context = context;
     }
 
-    /**
-     * Find resource for <code>errorId</code> in strings resources file
-     *
-     * @param errorId - resource name
-     * @return - resource is found, otherwise <code>errorId</code>
-     */
-    @Nullable
-    private String getErrorMessage(@Nullable String errorId) {
-        try {
-            int resID = context.getResources().getIdentifier(errorId, "string", context.getPackageName());
-            return context.getString(resID);
-        } catch (Exception e) {
-            Log.e(TAG, String.format("Can't find resource for `%s`", errorId));
-            e.printStackTrace();
-            return errorId;
-        }
-    }
-
+    @Override
     public void showLocalValidationError(@NonNull Object container,
                                          @NonNull Field field,
                                          @Nullable String message) {
@@ -55,6 +38,23 @@ public class ValidationErrorVisualizer {
             Log.e(TAG, "Illegal access exception while invoking method setError with one string parameter on field");
         } catch (NullPointerException e) {
             Log.e(TAG, "No such field on form " + field.getName());
+        }
+    }
+
+    /**
+     * Find resource for <code>errorId</code> in strings resources file
+     * @param errorId - resource name
+     * @return - resource is found, otherwise <code>errorId</code>
+     */
+    @Nullable
+    private String getErrorMessage(@Nullable String errorId) {
+        try {
+            int resID = context.getResources().getIdentifier(errorId, "string", context.getPackageName());
+            return context.getString(resID);
+        } catch (Exception e) {
+            Log.e(TAG, String.format("Can't find resource for `%s`", errorId));
+            e.printStackTrace();
+            return errorId;
         }
     }
 

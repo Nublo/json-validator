@@ -12,11 +12,11 @@ import static java.util.Collections.emptyList;
 
 public class TypeValidator extends AbstractValidator {
 
-    public TypeValidator(String message) {
-        this.message = message;
+    public TypeValidator() {
     }
 
-    public TypeValidator() {
+    public TypeValidator(String message) {
+        this.message = message;
     }
 
     @NonNull

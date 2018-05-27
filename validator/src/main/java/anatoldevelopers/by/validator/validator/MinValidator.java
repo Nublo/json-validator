@@ -41,7 +41,7 @@ public class MinValidator extends AbstractValidator {
         return compareTo(Double.parseDouble(value), (Number) fieldValue) > 0;
     }
 
-    public int compareTo(Number n1, Number n2) {
+    private int compareTo(Number n1, Number n2) {
         BigDecimal b1 = new BigDecimal(n1.doubleValue());
         BigDecimal b2 = new BigDecimal(n2.doubleValue());
         return b1.compareTo(b2);

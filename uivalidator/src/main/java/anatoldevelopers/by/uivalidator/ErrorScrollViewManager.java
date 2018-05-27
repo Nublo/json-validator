@@ -1,6 +1,5 @@
-package anatoldevelopers.by.uivalidator.manager;
+package anatoldevelopers.by.uivalidator;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.ScrollView;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import anatoldevelopers.by.uivalidator.visualizer.ValidationErrorVisualizer;
 import anatoldevelopers.by.validator.ValidationError;
 
 public class ErrorScrollViewManager extends ErrorManager {
@@ -19,9 +19,9 @@ public class ErrorScrollViewManager extends ErrorManager {
     private final ScrollView scrollView;
     private int topOffset;
 
-    public ErrorScrollViewManager(@NonNull Context context,
+    public ErrorScrollViewManager(@NonNull ValidationErrorVisualizer visualizer,
                                   @NonNull ScrollView scrollView) {
-        super(context);
+        super(visualizer);
         this.scrollView = scrollView;
         topOffset = Integer.MAX_VALUE;
     }
@@ -30,7 +30,7 @@ public class ErrorScrollViewManager extends ErrorManager {
     public void showValidationErrors(@NonNull Object container, @NonNull List<ValidationError> errors) {
         topOffset = Integer.MAX_VALUE;
         super.showValidationErrors(container, errors);
-        makeScroll(topOffset);
+        scroll(topOffset);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ErrorScrollViewManager extends ErrorManager {
         }
     }
 
-    private int calculateParentTop(View view) {
+    private int calculateParentTop(@NonNull View view) {
         if (view.getParent() instanceof ScrollView) {
             return view.getTop();
         } else {
@@ -54,7 +54,7 @@ public class ErrorScrollViewManager extends ErrorManager {
         }
     }
 
-    private void makeScroll(int offset) {
+    private void scroll(int offset) {
         if (offset != Integer.MAX_VALUE) {
             scrollView.smoothScrollTo(0, offset);
         }

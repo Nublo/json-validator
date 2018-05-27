@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notEmpty">This field shouldn\'t be empty</string>
+    <string name="latinAndDash">Only latin letters and dash accepted</string>
+    <string name="minSixSymbols">Minimum password length is 6 symbols</string>
+    <string name="min18years">You should be at least 18 years to use our service</string>
+    <string name="max45years">You should not be older 45 years to user our service</string>
+</resources>

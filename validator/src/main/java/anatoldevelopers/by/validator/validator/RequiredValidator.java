@@ -11,11 +11,11 @@ import anatoldevelopers.by.validator.ValidationError;
 
 public class RequiredValidator extends AbstractValidator {
 
-    public RequiredValidator(String message) {
-        this.message = message;
+    public RequiredValidator() {
     }
 
-    public RequiredValidator() {
+    public RequiredValidator(String message) {
+        this.message = message;
     }
 
     @NonNull

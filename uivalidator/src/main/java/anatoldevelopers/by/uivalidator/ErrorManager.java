@@ -1,17 +1,15 @@
-package anatoldevelopers.by.uivalidator.manager;
+package anatoldevelopers.by.uivalidator;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 
+import anatoldevelopers.by.uivalidator.visualizer.ValidationErrorVisualizer;
 import anatoldevelopers.by.validator.ValidationError;
 
 public class ErrorManager {
@@ -20,8 +18,8 @@ public class ErrorManager {
 
     private final ValidationErrorVisualizer visualizer;
 
-    public ErrorManager(@NonNull Context context) {
-        visualizer = new ValidationErrorVisualizer(context);
+    public ErrorManager(ValidationErrorVisualizer visualizer) {
+        this.visualizer = visualizer;
     }
 
     public void showValidationErrors(@NonNull Object container,

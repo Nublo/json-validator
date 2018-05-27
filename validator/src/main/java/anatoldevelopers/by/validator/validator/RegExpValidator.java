@@ -14,12 +14,12 @@ public class RegExpValidator extends AbstractValidator {
 
     private Pattern pattern;
 
+    public RegExpValidator() {
+    }
+
     public RegExpValidator(String message, String value) {
         this.message = message;
         this.value = value;
-    }
-
-    public RegExpValidator() {
     }
 
     @NonNull
@@ -31,14 +31,14 @@ public class RegExpValidator extends AbstractValidator {
         }
 
         if (fieldValue != null && !getPattern().matcher((String) fieldValue).matches()) {
-            ValidationError error = new ValidationError(field, message, fieldValue, pattern);
+            ValidationError error = new ValidationError(field, message, fieldValue, getPattern());
             return Collections.singletonList(error);
         }
 
         return Collections.emptyList();
     }
 
-    public Pattern getPattern() {
+    private Pattern getPattern() {
         if (pattern == null) {
             pattern = Pattern.compile(value);
         }
