@@ -1,4 +1,4 @@
-package anatoldevelopers.by.uivalidator;
+package anatoldevelopers.by.uivalidator.errormanager;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,16 +12,17 @@ import java.util.List;
 import anatoldevelopers.by.uivalidator.visualizer.ValidationErrorVisualizer;
 import anatoldevelopers.by.validator.ValidationError;
 
-public class ErrorManager {
+public class DefaultErrorManager implements ErrorManager {
 
-    private static final String TAG = ErrorManager.class.toString();
+    private static final String TAG = DefaultErrorManager.class.toString();
 
     private final ValidationErrorVisualizer visualizer;
 
-    public ErrorManager(ValidationErrorVisualizer visualizer) {
+    public DefaultErrorManager(ValidationErrorVisualizer visualizer) {
         this.visualizer = visualizer;
     }
 
+    @Override
     public void showValidationErrors(@NonNull Object container,
                                      @NonNull List<ValidationError> errors) {
         HashSet<String> shownErrors = new HashSet<>();

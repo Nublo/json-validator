@@ -9,20 +9,13 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import anatoldevelopers.by.uivalidator.ErrorManager;
 import anatoldevelopers.by.uivalidator.Field;
-import anatoldevelopers.by.uivalidator.visualizer.ValidationErrorVisualizerImpl;
-import anatoldevelopers.by.validator.FieldsSchemaValidator;
+import anatoldevelopers.by.uivalidator.ValidatorFacade;
 import anatoldevelopers.by.validator.ValidationError;
-import anatoldevelopers.by.validator.gson.FieldsSchemaValidatorFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Field("password")
     private TextInputLayout passwordInput;
 
-    private FieldsSchemaValidator validator;
-    private ErrorManager errorManager;
+    private ValidatorFacade validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
-        validator = FieldsSchemaValidatorFactory.create(getJsonSchemaStringFromResources(R.raw.validation));
-        errorManager = new ErrorManager(new ValidationErrorVisualizerImpl(this));
+        validator = new ValidatorFacade(this, R.raw.validation);
     }
 
     private void initViews() {
@@ -62,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         if (errors.isEmpty()) {
             Toast.makeText(this, "Everything is fine", Toast.LENGTH_LONG).show();
         } else {
-            errorManager.showValidationErrors(this, errors);
+            validator.showValidationErrors(this, errors);
         }
     }
 
@@ -71,23 +62,6 @@ public class MainActivity extends AppCompatActivity {
         params.put("userName", userNameInput.getEditText().getText().toString());
         params.put("password", passwordInput.getEditText().getText().toString());
         return params;
-    }
-
-    private String getJsonSchemaStringFromResources(int resourceID) {
-        InputStream inputStream = getResources().openRawResource(resourceID);
-        InputStreamReader inputreader = new InputStreamReader(inputStream);
-        BufferedReader buffreader = new BufferedReader(inputreader);
-        String line;
-        StringBuilder text = new StringBuilder();
-
-        try {
-            while ((line = buffreader.readLine()) != null) {
-                text.append(line);
-            }
-        } catch (IOException e) {
-            return null;
-        }
-        return text.toString();
     }
 
     static class CleanErrorWatcher implements TextWatcher {

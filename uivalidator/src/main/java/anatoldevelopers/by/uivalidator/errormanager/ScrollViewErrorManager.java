@@ -1,4 +1,4 @@
-package anatoldevelopers.by.uivalidator;
+package anatoldevelopers.by.uivalidator.errormanager;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -12,14 +12,14 @@ import java.util.List;
 import anatoldevelopers.by.uivalidator.visualizer.ValidationErrorVisualizer;
 import anatoldevelopers.by.validator.ValidationError;
 
-public class ErrorScrollViewManager extends ErrorManager {
+public class ScrollViewErrorManager extends DefaultErrorManager {
 
-    private static final String TAG = ErrorScrollViewManager.class.toString();
+    private static final String TAG = ScrollViewErrorManager.class.toString();
 
     private final ScrollView scrollView;
     private int topOffset;
 
-    public ErrorScrollViewManager(@NonNull ValidationErrorVisualizer visualizer,
+    public ScrollViewErrorManager(@NonNull ValidationErrorVisualizer visualizer,
                                   @NonNull ScrollView scrollView) {
         super(visualizer);
         this.scrollView = scrollView;
